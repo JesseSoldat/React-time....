@@ -25,8 +25,10 @@ class Login extends Component {
 
 		firebase.auth().onAuthStateChanged(function(user){
 			if(user){
+				console.log(user);
 
 			} else {
+				console.log('no user');
 
 			}
 		
@@ -47,10 +49,11 @@ class Login extends Component {
 
 	handleSubmit(e){
 		e.preventDefault();
-		console.log(this.state.email);
-		console.log(this.state.pass);
+		let email = this.state.email;
+		let pass = this.state.pass;
 
-
+		firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(err){
+		});
 	}
 
 	render() {

@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
 import { Link, IndexLink } from 'react-router';
+import firebase from 'firebase';
 
 class Layout extends Component {
+
+	logout(){
+		firebase.auth().signOut().then(function(){
+
+		}, function(err){
+
+		});
+
+	}
+
 	render(){
 		return(
 		<div>
@@ -18,6 +29,9 @@ class Layout extends Component {
 							</li>
 							<li>
 								<Link to="/login">Login</Link>
+							</li>
+							<li onClick={this.logout}>
+								<Link>Logout</Link>
 							</li>
 						</ul>
 					</div>

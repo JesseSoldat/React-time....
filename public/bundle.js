@@ -28508,6 +28508,10 @@
 	
 	var _reactRouter = __webpack_require__(/*! react-router */ 172);
 	
+	var _firebase = __webpack_require__(/*! firebase */ 235);
+	
+	var _firebase2 = _interopRequireDefault(_firebase);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -28526,6 +28530,11 @@
 		}
 	
 		_createClass(Layout, [{
+			key: 'logout',
+			value: function logout() {
+				_firebase2.default.auth().signOut().then(function () {}, function (err) {});
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
@@ -28568,6 +28577,15 @@
 											_reactRouter.Link,
 											{ to: '/login' },
 											'Login'
+										)
+									),
+									_react2.default.createElement(
+										'li',
+										{ onClick: this.logout },
+										_react2.default.createElement(
+											_reactRouter.Link,
+											null,
+											'Logout'
 										)
 									)
 								)
@@ -28694,7 +28712,11 @@
 			value: function componentWillMount() {
 	
 				_firebase2.default.auth().onAuthStateChanged(function (user) {
-					if (user) {} else {}
+					if (user) {
+						console.log(user);
+					} else {
+						console.log('no user');
+					}
 				});
 			}
 		}, {
@@ -28711,8 +28733,10 @@
 			key: 'handleSubmit',
 			value: function handleSubmit(e) {
 				e.preventDefault();
-				console.log(this.state.email);
-				console.log(this.state.pass);
+				var email = this.state.email;
+				var pass = this.state.pass;
+	
+				_firebase2.default.auth().signInWithEmailAndPassword(email, pass).catch(function (err) {});
 			}
 		}, {
 			key: 'render',
