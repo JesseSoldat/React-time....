@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, 
+	IndexRoute } from 'react-router';
+
+import firebase from 'firebase';
+import fireConfig from './firebaseConfig.js';
+
+firebase.initializeApp(fireConfig);
 
 import Layout from './home/Layout.jsx';
 import Home from './home/Home.jsx';
